@@ -1,19 +1,15 @@
 .loader {
-    color: #e01a1a;
+    color: #5897fb;
     font-size: 10px;
     width: 1em;
     height: 1em;
     border-radius: 50%;
     position: relative;
-    top: 20px;
-    left: 20px;
+    top: 100px;
+    left: 50%;
     text-indent: -9999em;
     animation: mulShdSpin 1.3s infinite linear;
     transform: translateZ(0);
-}
-
-.is-active {
-    visibility: visible;
 }
 
 @keyframes mulShdSpin {
@@ -79,4 +75,18 @@
 
 .error {
     display: none;
+}
+
+
+
+.breed-select {
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+.cat-info{
+    display: flex;
+}
+
+.cat-info img {
+    margin-right: 20px;
 }

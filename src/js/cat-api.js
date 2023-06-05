@@ -12,9 +12,6 @@ const options = {
   },
 };
 
-const select = document.querySelector('.breed-select');
-const catInfo = document.querySelector('.cat-info');
-
 function fetchBreeds() {
   return fetch(`${BASE_URL}/breeds`, options)
     .then(r => {
@@ -24,9 +21,9 @@ function fetchBreeds() {
 
 function fetchCatByBreed(breedId) {
   return fetch(
-    `${BASE_URL}/images/search?breed_ids=${breedId}&api_key=${API_KEY}`
-  )
-    .then(r => {
-      return r.json();
-    })
+    `${BASE_URL}/images/search?&breed_ids=${breedId}&api_key=${API_KEY}`,
+    options
+  ).then(r => {
+    return r.json();
+  });
 }
