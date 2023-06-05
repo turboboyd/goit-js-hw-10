@@ -1,24 +1,26 @@
 import { fetchBreeds, fetchCatByBreed } from './js/cat-api';
-
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SlimSelect from 'slim-select';
 import 'slim-select/dist/slimselect.css';
 const select = document.querySelector('.breed-select');
 const catInfoBlock = document.querySelector('.cat-info');
 const loader = document.querySelector('.loader');
 
-
-select.style.visibility= "hidden";
+const textError = document.querySelector('.error');
 
 fetchBreeds()
   .then(renderBreed)
-  .catch(err => console.log(err));
+  .catch(err => {
+    console.log(err),
+      Notify.failure('Oops! Something went wrong! Try reloading the page!');
+  });
 
 function renderBreed(breeds) {
   showLoader();
   setTimeout(() => {
     breeds.map(breed => renderSelectyBreed(breed));
     hidenLoader();
-    select.style.visibility = "visible";
+    select.style.visibility = 'visible';
     new SlimSelect({
       select: '#single',
     });
@@ -34,7 +36,6 @@ select.addEventListener('change', setOutput);
 
 function setOutput() {
   const selectedOptionValue = select.value;
-  console.log('selectedOptionValue: ', selectedOptionValue);
 
   fetchCatByBreed(selectedOptionValue)
     .then(cats => {
@@ -45,7 +46,11 @@ function setOutput() {
         hidenLoader();
       }, 1000);
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      hidenLoader(),
+        console.log(err),
+        Notify.failure('Oops! Something went wrong! Try reloading the page!');
+    });
 }
 
 function renderCatInfo(cat) {

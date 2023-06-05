@@ -14,7 +14,11 @@ const options = {
 
 function fetchBreeds() {
   return fetch(`${BASE_URL}/breeds`, options)
-    .then(r => {
+    .then(
+      r => {
+        if (!r.ok) {
+          throw new Error
+        }
       return r.json();
     })
 }
@@ -24,6 +28,9 @@ function fetchCatByBreed(breedId) {
     `${BASE_URL}/images/search?&breed_ids=${breedId}&api_key=${API_KEY}`,
     options
   ).then(r => {
+     if (!r.ok) { 
+       throw new Error();
+     }
     return r.json();
   });
 }
