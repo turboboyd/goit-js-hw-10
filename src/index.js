@@ -54,11 +54,12 @@ function setOutput() {
 }
 
 function renderCatInfo(cat) {
+  const { name, description, temperament } = cat.breeds[0];
   const markup = `<img src="${cat.url}" width="400">
         <div class="desc-wrapper">
-        <h2>${cat.breeds[0].name}</h2>
-        <p class="description">${cat.breeds[0].description}</p>
-        <p class="temperament"><b>Temperament:${cat.breeds[0].temperament} </b></p>
+        <h2>${name}</h2>
+        <p class="description">${description}</p>
+        <p class="temperament"><b>Temperament:${temperament} </b></p>
       </div>`;
   catInfoBlock.insertAdjacentHTML('beforeend', markup);
 }
